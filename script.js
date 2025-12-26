@@ -12,7 +12,14 @@ function checkGuess() {
   } else {
     result.textContent = "↑ ตัวเลขตํ่าไป";
   }
-
+  // ตัวแปรนับจํานวนครั้งที่ทาย จากstep-06
+  let attemptCount = 0;
+  // ฟังก์ชันอัปเดตจํานวนครั้ง
+  function updateDisplay() {
+    const attemptsContainer = document.getElementById("attemptsContainer");
+    attemptsContainer.textContent = `ทายแล้ว: ${attemptCount} ครั้ง`;
+  }
+  //อัพเดตมาจาก step-04 หน้า 10 อ่านดีๆนะอย่าไปแก้โค้ด
   // filepath: script.js
   // ...existing code...
   // ฟังก์ชันตรวจสอบการทาย
@@ -21,6 +28,17 @@ function checkGuess() {
     const guessValue = parseInt(guessInput.value);
     const resultContainer = document.getElementById("resultContainer");
     // Validation: ตรวจสอบว่าใส่ตัวเลขหรือไม่
+    // ... validation code ...
+    attemptCount++; // เพิ่มตรงนี้
+    if (guessValue === secretNumber) {
+      resultContainer.innerHTML = `
+ <div class="alert alert-success" role="alert">
+ <h5>✓ ถูกต้อง!</h5>
+ <p>คุณทายถูกในครั้งที่ ${attemptCount}</p>
+ </div>
+ `;
+    }
+    // ... rest of code ...
     if (isNaN(guessValue) || guessInput.value === "") {
       resultContainer.innerHTML = `
  <div class="alert alert-danger" role="alert">
